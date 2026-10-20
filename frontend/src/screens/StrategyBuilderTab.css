@@ -31,6 +31,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
+  align-items: stretch;
+}
+
+.strategy-builder-tab__card {
+  display: flex;
+  flex-direction: column;
 }
 
 .strategy-builder-tab__card-header {
@@ -49,5 +55,73 @@
 .strategy-builder-tab__fields {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: 0.75rem;
+  flex: 1;
+}
+
+.strategy-builder-tab__fields .form-field label {
+  display: flex;
+  align-items: flex-end;
+  min-height: 2.3rem;
+}
+
+.strategy-builder-tab__card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.strategy-builder-tab__execute-btn {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.88rem;
+}
+
+.strategy-builder-tab__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.strategy-builder-tab__modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.strategy-builder-tab__modal p {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.strategy-builder-tab__modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.strategy-builder-tab__toast {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 0.75rem 1.1rem;
+  font-size: 0.88rem;
+  z-index: 60;
 }

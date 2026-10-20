@@ -34,6 +34,8 @@ export default function StrategyBuilderTab() {
     }
     return initial;
   });
+  const [confirmId, setConfirmId] = useState(null);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     try {
@@ -43,9 +45,26 @@ export default function StrategyBuilderTab() {
     }
   }, [config]);
 
+  useEffect(() => {
+    if (!toast) return undefined;
+    const t = setTimeout(() => setToast(null), 4000);
+    return () => clearTimeout(t);
+  }, [toast]);
+
   function updateStrategy(id, patch) {
     setConfig((prev) => ({ ...prev, [id]: { ...prev[id], ...patch } }));
   }
+
+  function cancelExecute() {
+    setConfirmId(null);
+  }
+
+  function confirmExecute() {
+    setConfirmId(null);
+    setToast('Auto-execution is not connected yet - no orders were placed.');
+  }
+
+  const confirmStrategy = STRATEGIES.find((s) => s.id === confirmId) || null;
 
   return (
     <div className="strategy-builder-tab">
@@ -118,10 +137,53 @@ export default function StrategyBuilderTab() {
                   />
                 </div>
               </div>
+
+              <div className="strategy-builder-tab__card-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary strategy-builder-tab__execute-btn"
+                  disabled={!settings.enabled}
+                  title={settings.enabled ? undefined : 'Enable this strategy first'}
+                  onClick={() => setConfirmId(s.id)}
+                >
+                  Execute
+                </button>
+              </div>
             </section>
           );
         })}
       </div>
+
+      {confirmStrategy && (
+        <div className="strategy-builder-tab__modal-overlay" role="presentation" onClick={cancelExecute}>
+          <div
+            className="strategy-builder-tab__modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="execute-confirm-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p id="execute-confirm-title">
+              Do you want to execute <strong>{confirmStrategy.index} {confirmStrategy.kind}</strong>{' '}
+              automatically?
+            </p>
+            <div className="strategy-builder-tab__modal-actions">
+              <button type="button" className="btn btn-secondary" onClick={cancelExecute}>
+                No
+              </button>
+              <button type="button" className="btn btn-primary" onClick={confirmExecute}>
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {toast && (
+        <div className="strategy-builder-tab__toast" role="status">
+          {toast}
+        </div>
+      )}
     </div>
   );
 }
