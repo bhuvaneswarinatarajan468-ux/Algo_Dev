@@ -16,6 +16,24 @@ const TABS = [
   { id: 'profile', label: 'Profile' },
 ];
 
+const TAB_AUTH_KEY = 'algo.tabAuthenticated';
+
+function markTabAuthenticated() {
+  try {
+    sessionStorage.setItem(TAB_AUTH_KEY, '1');
+  } catch {
+    // ignore (e.g. private browsing with storage disabled)
+  }
+}
+
+function isTabAuthenticated() {
+  try {
+    return sessionStorage.getItem(TAB_AUTH_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 function useQueryFlag(name) {
   const [present] = useState(() => new URLSearchParams(window.location.search).has(name));
   useEffect(() => {
@@ -34,6 +52,11 @@ export default function App() {
   const [profile, setProfile] = useState(null);
   const [activeTab, setActiveTab] = useState('signals');
   const hadLoginError = useQueryFlag('login_error');
+  const hadLoginSuccess = useQueryFlag('login_success');
+
+  useEffect(() => {
+    if (hadLoginSuccess) markTabAuthenticated();
+  }, [hadLoginSuccess]);
 
   const refreshStatus = useCallback(async () => {
     try {
@@ -52,7 +75,7 @@ export default function App() {
   }, [refreshStatus]);
 
   useEffect(() => {
-    if (!status?.logged_in) {
+    if (!status?.logged_in || !isTabAuthenticated()) {
       setProfile(null);
       return;
     }
@@ -66,6 +89,7 @@ export default function App() {
   }, [status?.logged_in]);
 
   const handleLoggedIn = useCallback(() => {
+    markTabAuthenticated();
     refreshStatus();
   }, [refreshStatus]);
 
@@ -92,7 +116,7 @@ export default function App() {
     return <NotConfigured />;
   }
 
-  if (!status.logged_in) {
+  if (!status.logged_in || !isTabAuthenticated()) {
     return (
       <>
         {hadLoginError && (

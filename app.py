@@ -158,7 +158,7 @@ def kite_callback(request_token: Optional[str] = None, status: Optional[str] = N
         _exchange_request_token(request_token)
     except HTTPException:
         return RedirectResponse(url="/?login_error=1")
-    return RedirectResponse(url="/")
+    return RedirectResponse(url="/?login_success=1")
 
 
 @app.post("/api/login")
