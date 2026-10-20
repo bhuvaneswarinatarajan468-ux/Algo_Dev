@@ -1,6 +1,6 @@
-# Algo
+# Algo_Dev
 
-A semi-automated trading signal scanner built on Zerodha Kite Connect.
+Algo is a trading analysis app that scans Nifty 100 stocks for moving-average crossover signals and backtests strategies with trading costs. Built with Python, React, and Zerodha Kite Connect, it helps evaluate trading ideas without placing orders.
 
 **Algo only ever displays signals. It never places, modifies, or cancels orders.**
 
