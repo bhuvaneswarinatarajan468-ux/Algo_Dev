@@ -1,0 +1,46 @@
+.equity-chart {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.equity-chart__legend {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.equity-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.equity-chart__swatch {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.equity-chart__swatch--strategy {
+  background: var(--color-accent);
+}
+
+.equity-chart__swatch--benchmark {
+  background: var(--color-text-faint);
+}
+
+.equity-chart__svg {
+  width: 100%;
+  height: auto;
+}
+
+.equity-chart__axis-label {
+  font-size: 10px;
+  fill: var(--color-text-faint);
+}

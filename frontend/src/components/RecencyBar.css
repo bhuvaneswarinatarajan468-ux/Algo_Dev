@@ -1,0 +1,26 @@
+.recency {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 90px;
+}
+
+.recency__track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.recency__fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.recency__value {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  min-width: 1.8em;
+  text-align: right;
+}

@@ -1,0 +1,19 @@
+.signal-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.signal-pill--bullish {
+  color: var(--color-bullish);
+  background: var(--color-bullish-bg);
+}
+
+.signal-pill--bearish {
+  color: var(--color-bearish);
+  background: var(--color-bearish-bg);
+}

@@ -1,0 +1,30 @@
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.filter-pill:hover {
+  color: var(--color-text);
+}
+
+.filter-pill--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.filter-pill__count {
+  color: inherit;
+  opacity: 0.75;
+}
